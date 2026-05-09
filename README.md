@@ -28,11 +28,14 @@ the server's modded blocks and items will be installed automatically.
 
 ## Download
 
-* [Latest version: 1.0.1 (MC 1.21.11)](https://github.com/ModernSpout/Spout-Fabric-client/releases/download/1.0.1/spout-1.0.1.jar)
-* Development versions: download from
-  [Actions](https://github.com/ModernSpout/Spout-Fabric-client/actions/workflows/build.yml),
-  under **Artifacts**
-* [Older releases](https://github.com/ModernSpout/Spout-Fabric-client/releases)
+* From [Modrinth](https://modrinth.com/mod/spout-client) or
+  [CurseForge](https://www.curseforge.com/minecraft/mc-mods/spout)
+* From GitHub:
+  * [Latest version: 1.0.1 (MC 1.21.11)](https://github.com/ModernSpout/Spout-Fabric-client/releases/download/1.0.1/spout-1.0.1.jar)
+  * Development versions: download from
+    [Actions](https://github.com/ModernSpout/Spout-Fabric-client/actions/workflows/build.yml),
+    under **Artifacts**
+  * [Older releases](https://github.com/ModernSpout/Spout-Fabric-client/releases)
 
 ## Installation
 
