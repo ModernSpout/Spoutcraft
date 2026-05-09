@@ -12,7 +12,7 @@
     "sources": "https://github.com/ModernSpout/Spout-Fabric-client"
   },
   "license": "See the included LICENSE.txt",
-  "icon": "assets/spout/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

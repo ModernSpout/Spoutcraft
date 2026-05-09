@@ -72,6 +72,16 @@ tasks.jar {
 	// TODO /license folder?
 }
 
+tasks.register<Exec>("recompressJar") {
+    group = "build"
+    dependsOn(tasks.remapJar)
+    val input = tasks.remapJar.get().archiveFile.get().asFile
+    commandLine(
+        "sh", "-c",
+        "advzip -z -4 ${input.absolutePath}"
+    )
+}
+
 // configure the maven publication
 publishing {
 	publications {

@@ -1,6 +1,6 @@
 <div align="center">
 
-  <!--<img src="src/main/resources/assets/spout/icon.png" alt="Spout logo" width="21%" align="right">-->
+  <!--<img src="icon.png" alt="Spout logo" width="21%" align="right">-->
   <h1>
     Spout<br>client (Fabric)
   </h1>
