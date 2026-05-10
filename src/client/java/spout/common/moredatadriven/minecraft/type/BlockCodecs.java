@@ -9,7 +9,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -37,10 +37,8 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import spout.client.fabric.moredatadriven.minecraft.type.BlockBehaviourOffsetTypeProxy;
-import spout.client.fabric.moredatadriven.minecraft.type.ChunkSectionLayerProxy;
 import spout.client.fabric.moredatadriven.minecraft.type.MapColorProxy;
 import spout.client.fabric.moredatadriven.minecraft.type.NoteBlockInstrumentProxy;
-import spout.client.fabric.moredatadriven.minecraft.type.PropertiesExtensions;
 import spout.client.fabric.moredatadriven.minecraft.type.PushReactionProxy;
 import spout.client.fabric.moredatadriven.minecraft.type.SoundTypeProxy;
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.BlockBehaviourPropertiesAccessor;
@@ -48,13 +46,13 @@ import spout.common.util.mojang.codec.EnumViaIdentifierCodec;
 import spout.common.util.mojang.codec.ProxyCodec;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 /**
  * Holder for codecs related to blocks.
  */
 public final class BlockCodecs {
 
-    private static final Codec<ChunkSectionLayer> CHUNK_SECTION_LAYER_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(ChunkSectionLayerProxy.class));
     private static final Codec<MapColor> MAP_COLOR_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(MapColorProxy.class));
     private static final Codec<BlockStateFunction<MapColor>> MAP_COLOR_FUNCTION_CODEC = BlockStateFunction.codec(MAP_COLOR_CODEC);
     private static final Codec<SoundType> SOUND_TYPE_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(SoundTypeProxy.class));
@@ -62,6 +60,38 @@ public final class BlockCodecs {
     private static final Codec<PushReaction> PUSH_REACTION_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(PushReactionProxy.class));
     private static final Codec<NoteBlockInstrument> NOTE_BLOCK_INSTRUMENT_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(NoteBlockInstrumentProxy.class));
     private static final Codec<BlockBehaviour.OffsetType> OFFSET_TYPE_CODEC = new ProxyCodec<>(new EnumViaIdentifierCodec<>(BlockBehaviourOffsetTypeProxy.class));
+
+    public static final Codec<BlockBehaviour.PostProcess> POST_PROCESS_CODEC = new Codec<>() {
+
+        @Override
+        public <T> DataResult<T> encode(BlockBehaviour.PostProcess input, DynamicOps<T> ops, T prefix) {
+            BlockPos output;
+            try {
+                output = input.getPostProcessPos(null, null, BlockPos.ZERO);
+            } catch (Exception e) {
+                return DataResult.error(() -> "Not an encodable post process: " + e);
+            }
+            if (output == null) {
+                return DataResult.success(ops.createString("null"));
+            }
+            return DataResult.success(ops.createIntList(IntStream.of(output.getX(), output.getY(), output.getZ())));
+        }
+
+        @Override
+        public <T> DataResult<Pair<BlockBehaviour.PostProcess, T>> decode(DynamicOps<T> ops, T input) {
+            DataResult<String> stringResult = ops.getStringValue(input);
+            if (stringResult.isSuccess() && stringResult.getOrThrow().equals("null")) {
+                return DataResult.success(Pair.of((state, level, pos) -> null, input));
+            }
+            DataResult<IntStream> intStreamResult = ops.getIntStream(input);
+            IntStream intStream = intStreamResult.getOrThrow();
+            int dx = intStream.findFirst().getAsInt();
+            int dy = intStream.findFirst().getAsInt();
+            int dz = intStream.findFirst().getAsInt();
+            return DataResult.success(Pair.of((state, level, pos) -> pos.offset(dx, dy, dz), input));
+        }
+
+    };
 
     public static final Codec<BlockBehaviour.Properties> PROPERTIES_CODEC = new Codec<>() {
 
@@ -76,15 +106,6 @@ public final class BlockCodecs {
             return ops.getMap(input).flatMap(mapLike -> {
                 BlockBehaviour.Properties properties = BlockBehaviour.Properties.of();
                 BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) properties;
-                PropertiesExtensions extensions = (PropertiesExtensions) properties;
-                T chunkSectionLayerInput = mapLike.get("chunk_section_layer");
-                if (chunkSectionLayerInput != null) {
-                    DataResult<ChunkSectionLayer> chunkSectionLayer = CHUNK_SECTION_LAYER_CODEC.decode(ops, chunkSectionLayerInput).map(Pair::getFirst);
-                    if (chunkSectionLayer.isError()) {
-                        return chunkSectionLayer.map($ -> null);
-                    }
-                    extensions.spout$setChunkSectionLayer(chunkSectionLayer.getOrThrow());
-                }
                 T mapColorInput = mapLike.get("map_color");
                 if (mapColorInput != null) {
                     DataResult<BlockStateFunction<MapColor>> mapColor = MAP_COLOR_FUNCTION_CODEC.decode(ops, mapColorInput).map(Pair::getFirst);
@@ -286,13 +307,13 @@ public final class BlockCodecs {
                     }
                     accessor.setIsViewBlocking(isViewBlocking.getOrThrow());
                 }
-                T hasPostProcessInput = mapLike.get("has_post_process");
-                if (hasPostProcessInput != null) {
-                    DataResult<KnownStatePredicate> hasPostProcess = KnownStatePredicate.CODEC.decode(ops, hasPostProcessInput).map(Pair::getFirst);
-                    if (hasPostProcess.isError()) {
-                        return hasPostProcess.map($ -> null);
+                T postProcessInput = mapLike.get("post_process");
+                if (postProcessInput != null) {
+                    DataResult<BlockBehaviour.PostProcess> postProcess = POST_PROCESS_CODEC.decode(ops, postProcessInput).map(Pair::getFirst);
+                    if (postProcess.isError()) {
+                        return postProcess.map($ -> null);
                     }
-                    accessor.setHasPostProcess(hasPostProcess.getOrThrow());
+                    accessor.setPostProcess(postProcess.getOrThrow());
                 }
                 T emissiveRenderingInput = mapLike.get("emissive_rendering");
                 if (emissiveRenderingInput != null) {

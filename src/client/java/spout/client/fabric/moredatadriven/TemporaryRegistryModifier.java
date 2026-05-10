@@ -119,7 +119,7 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
     static {
         try {
             allTagsField = Arrays.stream(MappedRegistry.class.getDeclaredFields())
-                .filter(f -> !Modifier.isPrivate(f.getModifiers()) && !Modifier.isProtected(f.getModifiers()))
+                .filter(f -> Modifier.isPrivate(f.getModifiers()))
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .filter(f -> Arrays.asList(MappedRegistry.class.getDeclaredClasses()).contains(f.getType()))
                 .findFirst()

@@ -1,5 +1,5 @@
 plugins {
-	id("net.fabricmc.fabric-loom-remap")
+    id("net.fabricmc.fabric-loom")
 	`maven-publish`
 }
 
@@ -22,7 +22,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		register("spout") {
+		register("spout-client") {
 			sourceSet(sourceSets.main.get())
 			sourceSet(sourceSets.getByName("client"))
 		}
@@ -32,15 +32,16 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
-	mappings(loom.officialMojangMappings())
-	modImplementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
+
+	implementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
+	implementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
 	
 }
 
 tasks.processResources {
+    val version = version
 	inputs.property("version", version)
 
 	filesMatching("fabric.mod.json") {
@@ -49,7 +50,7 @@ tasks.processResources {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-	options.release = 21
+	options.release = 25
 }
 
 java {
@@ -58,15 +59,18 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.jar {
-	inputs.property("archivesName", base.archivesName)
+    val archivesName = base.archivesName
+    val projectName = project.name
+	inputs.property("archivesName", archivesName)
+	inputs.property("projectName", projectName)
 
 	from("LICENSE.md") {
-		rename { "${it}_${base.archivesName.get()}" }
+		rename { "${it}_${projectName}" }
 	}
 
 	// TODO /license folder?
@@ -74,8 +78,8 @@ tasks.jar {
 
 tasks.register<Exec>("recompressJar") {
     group = "build"
-    dependsOn(tasks.remapJar)
-    val input = tasks.remapJar.get().archiveFile.get().asFile
+    dependsOn(tasks.jar)
+    val input = tasks.jar.get().archiveFile.get().asFile
     commandLine(
         "sh", "-c",
         "advzip -z -4 ${input.absolutePath}"

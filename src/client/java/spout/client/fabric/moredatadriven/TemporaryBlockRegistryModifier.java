@@ -1,16 +1,12 @@
 package spout.client.fabric.moredatadriven;
 
 import it.unimi.dsi.fastutil.Pair;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.DefaultedMappedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import spout.common.moredatadriven.minecraft.BlockEntityAlternativeValidation;
 import spout.common.moredatadriven.minecraft.type.ApplyLazyBlockValues;
-import spout.client.fabric.moredatadriven.minecraft.type.PropertiesExtensions;
-import spout.client.fabric.moredatadriven.minecraft.type.mixin.ItemBlockRenderTypesAccessor;
-import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 /**
@@ -34,26 +30,9 @@ public final class TemporaryBlockRegistryModifier extends TemporaryRegistryModif
     }
 
     @Override
-    public void add(ResourceKey<Block> resourceKey, Block resource) {
-        super.add(resourceKey, resource);
-        // Add render type
-        @Nullable ChunkSectionLayer chunkSectionLayer = ((PropertiesExtensions) resource.properties()).spout$getChunkSectionLayer();
-        if (chunkSectionLayer != null) {
-            ItemBlockRenderTypesAccessor.getTypeByBlock().put(resource, chunkSectionLayer);
-        }
-    }
-
-    @Override
     public void remove() {
         BlockEntityAlternativeValidation.clear();
         super.remove();
-    }
-
-    @Override
-    public void remove(ResourceKey<Block> resourceKey, Block resource) {
-        super.remove(resourceKey, resource);
-        // Remove render type
-        ItemBlockRenderTypesAccessor.getTypeByBlock().remove(resource);
     }
 
 }

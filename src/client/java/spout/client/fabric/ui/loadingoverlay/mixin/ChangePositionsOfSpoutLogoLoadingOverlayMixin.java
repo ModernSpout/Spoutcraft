@@ -1,7 +1,7 @@
 package spout.client.fabric.ui.loadingoverlay.mixin;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,15 +17,15 @@ import spout.client.fabric.ui.loadingoverlay.SpoutLogoIdentifier;
 public abstract class ChangePositionsOfSpoutLogoLoadingOverlayMixin {
 
     @Redirect(
-        method = "render",
+        method = "extractRenderState",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIIIII)V",
+            target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIIIII)V",
             ordinal = 0
         )
     )
     private void redirectBlitFirst(
-        GuiGraphics guiGraphics,
+        GuiGraphicsExtractor guiGraphics,
         RenderPipeline renderPipeline,
         Identifier texture,
         int i, int j,
@@ -52,15 +52,15 @@ public abstract class ChangePositionsOfSpoutLogoLoadingOverlayMixin {
     }
 
     @Redirect(
-        method = "render",
+        method = "extractRenderState",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIIIII)V",
+            target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIIIII)V",
             ordinal = 1
         )
     )
     private void redirectBlitSecond(
-        GuiGraphics guiGraphics,
+        GuiGraphicsExtractor guiGraphics,
         RenderPipeline renderPipeline,
         Identifier texture,
         int i, int j,

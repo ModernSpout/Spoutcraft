@@ -109,8 +109,8 @@ public interface BlockBehaviourPropertiesAccessor {
     @Accessor("isViewBlocking")
     void setIsViewBlocking(BlockBehaviour.StatePredicate predicate);
 
-    @Accessor("hasPostProcess")
-    void setHasPostProcess(BlockBehaviour.StatePredicate predicate);
+    @Accessor("postProcess")
+    void setPostProcess(BlockBehaviour.PostProcess postProcess);
 
     @Accessor("emissiveRendering")
     void setEmissiveRendering(BlockBehaviour.StatePredicate predicate);

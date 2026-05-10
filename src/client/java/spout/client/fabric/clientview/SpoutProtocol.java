@@ -1,11 +1,11 @@
 package spout.client.fabric.clientview;
 
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.FriendlyByteBuf;
@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class SpoutProtocol {
 
     private static final Identifier CLIENT_MOD_DETECTION_PACKET_ID = Identifier.fromNamespaceAndPath(SpoutNamespace.SPOUT, "detect_client_mod");
-    private static final int MIN_PROTOCOL_VERSION = 2;
-    private static final int MAX_PROTOCOL_VERSION = 2;
+    private static final int MIN_PROTOCOL_VERSION = 3;
+    private static final int MAX_PROTOCOL_VERSION = 3;
 
     private static final AtomicReference<ClientModState> state = new AtomicReference<>(ClientModState.IDLE);
 
@@ -58,7 +58,7 @@ public final class SpoutProtocol {
                             responseProtocolVersion = bestProtocolVersion;
                         }
                         // Respond
-                        FriendlyByteBuf response = new FriendlyByteBuf(PacketByteBufs.create());
+                        FriendlyByteBuf response = new FriendlyByteBuf(Unpooled.buffer(15));
                         response.writeVarInt(0);
                         response.writeVarInt(nonce);
                         response.writeVarInt(responseProtocolVersion);
@@ -69,7 +69,7 @@ public final class SpoutProtocol {
             // We did not understand this protocol
             return CompletableFuture.completedFuture(null);
         });
-        PayloadTypeRegistry.configurationS2C().register(ClientModCustomContentPacketPayload.TYPE, ClientModCustomContentPacketPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundConfiguration().register(ClientModCustomContentPacketPayload.TYPE, ClientModCustomContentPacketPayload.STREAM_CODEC);
         ClientConfigurationNetworking.registerGlobalReceiver(ClientModCustomContentPacketPayload.TYPE, (payload, context) -> {
             ClientModCustomContentReceiving.handlePacket(payload);
         });
