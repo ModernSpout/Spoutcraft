@@ -13,4 +13,4 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "spout-client"
+rootProject.name = "spoutcraft"

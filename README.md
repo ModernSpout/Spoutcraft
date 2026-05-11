@@ -2,40 +2,53 @@
 
   <!--<img src="icon.png" alt="Spout logo" width="21%" align="right">-->
   <h1>
-    Spout<br>client (Fabric)
+    Spoutcraft<br>client mod (Fabric)
   </h1>
   <h3>
-    A client mod that installs custom blocks and items
+    Automatically downloads and installs modded content
     <br>
     when joining a server
   </h3>
 
-[![Discord](https://img.shields.io/discord/1091830813240348732?color=5865F2&label=discord&style=for-the-badge)](https://discord.gg/EduvcVmKS7)
-[![1.21.11](https://img.shields.io/badge/Latest_version-1.21.11-4fa31a?style=for-the-badge)](https://github.com/ModernSpout/Spout-Fabric-client/releases/download/1.0.2/spout-1.0.2.jar)
+[![Download latest version](https://img.shields.io/badge/Version-26.1.2-598f38?style=for-the-badge)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.0/spoutcraft-1.1.0.jar)
+[![Modrinth](https://img.shields.io/badge/⬇-modrinth-2c9448?style=for-the-badge)](https://modrinth.com/mod/spout-client)
+[![CurseForge](https://img.shields.io/badge/⬇-curseforge-ba5c3d?style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/spout)
+[![Discord](https://img.shields.io/discord/1091830813240348732?color=5865F2&label=Discord&style=for-the-badge)](https://discord.gg/EduvcVmKS7)
 
 </div>
 
 ## Introduction
 
-The Spout client mod is an automatic modloader for Spout servers: when you join a multiplayer server,
+Spoutcraft is an automatic modloader for multiplayer: when you join a [Spout](https://github.com/ModernSpout/Spout) server,
 the server's modded blocks and items will be installed automatically.
 
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Supports non-vanilla block shapes, like vertical slabs
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Supports all properties, such as breaking speed, light level and textures
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Supports all properties, including breaking speed, light level and textures
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Auto-completion in commands, such as <code>/give</code>
 
+Because it contains no modded block or items of itself, the Spoutcraft client mod is super lightweight.
+<br>
+It is incredibly fast: a server's modded content is downloaded and installed in less than a second.
+
 ## Downloads
 
-* From [Modrinth](https://modrinth.com/mod/spout-client) or
+&nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;From [Modrinth](https://modrinth.com/mod/spout-client) or
   [CurseForge](https://www.curseforge.com/minecraft/mc-mods/spout)
-* Directly from GitHub:
-  * [Latest version: 1.0.2 (MC 1.21.11)](https://github.com/ModernSpout/Spout-Fabric-client/releases/download/1.0.2/spout-1.0.2.jar)
-  * Development versions: download from
-    [Actions](https://github.com/ModernSpout/Spout-Fabric-client/actions/workflows/build.yml),
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;Directly from GitHub:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;
+**[Latest version: 1.1.0 (MC 26.1.2)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.0/spoutcraft-1.1.0.jar)**
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;
+Development versions: download from
+    [Actions](https://github.com/ModernSpout/Spoutcraft/actions/workflows/build.yml),
     under **Artifacts**
-  * [Older releases](https://github.com/ModernSpout/Spout-Fabric-client/releases)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;
+[Older releases](https://github.com/ModernSpout/Spoutcraft/releases)
 
 ## Installation
 
@@ -50,7 +63,7 @@ Requires [Fabric API](https://modrinth.com/mod/fabric-api).
         <h1>🔨</h1>
       </td>
       <td valign="center">
-        Spout has been tested, but compatibility with other mods has not been explored fully.
+        Spoutcraft has been tested, but compatibility with other mods has not been explored fully.
         <br>
         Please report if you encounter any issues.
       </td>
@@ -58,6 +71,8 @@ Requires [Fabric API](https://modrinth.com/mod/fabric-api).
   </table>
 </div>
 
-## Adding Spout server-side
+## Installing Spout server-side
 
-* Paper: [Spout server (Paper/Bukkit)](https://github.com/ModernSpout/Spout-Paper-server)
+* Paper/Spigot/Bukkit: [Spout (for Paper)](https://github.com/ModernSpout/Spout)
+* Fabric: currently being developed,
+  please let us know on [Discord](https://discord.gg/EduvcVmKS7) if you are interested!

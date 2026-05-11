@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class Spout implements ModInitializer {
 
-	public static final String MOD_ID = "spout-client";
+	public static final String MOD_ID = "spoutcraft";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
@@ -15,7 +15,7 @@ public class Spout implements ModInitializer {
         try {
             Class.forName("spout.client.fabric.SpoutClient");
         } catch (ClassNotFoundException ignored) {
-            LOGGER.warn("Spout client loaded on a Fabric server - will have no effect");
+            LOGGER.warn("Spoutcraft loaded on a Fabric server - will have no effect");
         }
 	}
 

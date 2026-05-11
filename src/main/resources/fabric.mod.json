@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "spout-client",
+  "id": "spoutcraft",
   "version": "${version}",
-  "name": "Spout client",
-  "description": "Automatically downloads and install modded blocks and items when joining Spout servers",
+  "name": "Spoutcraft",
+  "description": "Automatically downloads and install modded content when joining Spout servers",
   "authors": [
     "Martijn Muijsers",
-    "Spout authors and contributors"
+    "Spoutcraft authors and contributors"
   ],
   "contact": {
-    "sources": "https://github.com/ModernSpout/Spout-Fabric-client"
+    "sources": "https://github.com/ModernSpout/Spoutcraft"
   },
   "license": "See the included LICENSE.txt",
   "icon": "assets/spout/icon.png",
@@ -24,27 +24,27 @@
   },
   "mixins": [
     {
-      "config": "spout-client.client.clientview.mixins.json",
+      "config": "spoutcraft.spout.client.fabric.clientview.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spout-client.client.moredatadriven.mixins.json",
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.type.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spout-client.client.ui.loadingoverlay.mixins.json",
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spout-client.client.ui.toast.mixins.json",
+      "config": "spoutcraft.spout.client.fabric.ui.loadingoverlay.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spout-client.impl.content.block.mixins.json",
+      "config": "spoutcraft.spout.client.fabric.ui.toast.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spout-client.impl.moredatadriven.minecraft.type.mixins.json",
+      "config": "spoutcraft.spout.common.builtincontent.block.mixins.json",
       "environment": "client"
     }
   ],

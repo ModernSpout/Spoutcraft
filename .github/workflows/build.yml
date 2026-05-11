@@ -29,8 +29,8 @@ jobs:
       - name: Upload JAR
         uses: actions/upload-artifact@v7
         with:
-          name: Spout client mod JAR
+          name: Spoutcraft JAR
           path: |
-            build/libs/spout-*.jar
-            !build/libs/spout-*-sources.jar
+            build/libs/spoutcraft-*.jar
+            !build/libs/spoutcraft-*-sources.jar
           archive: false
