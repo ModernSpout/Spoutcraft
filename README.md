@@ -10,7 +10,7 @@
     when joining a server
   </h3>
 
-[![Download latest version](https://img.shields.io/badge/Version-26.1.2-598f38?style=for-the-badge)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.0/spoutcraft-1.1.0.jar)
+[![Download latest version](https://img.shields.io/badge/Version-26.1.2-598f38?style=for-the-badge)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.1/spoutcraft-1.1.1.jar)
 [![Modrinth](https://img.shields.io/badge/⬇-modrinth-2c9448?style=for-the-badge)](https://modrinth.com/mod/spout-client)
 [![CurseForge](https://img.shields.io/badge/⬇-curseforge-ba5c3d?style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/spout)
 [![Discord](https://img.shields.io/discord/1091830813240348732?color=5865F2&label=Discord&style=for-the-badge)](https://discord.gg/EduvcVmKS7)
@@ -40,7 +40,7 @@ It is incredibly fast: a server's modded content is downloaded and installed in 
 &nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;Directly from GitHub:
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;
-**[Latest version: 1.1.0 (MC 26.1.2)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.0/spoutcraft-1.1.0.jar)**
+**[Latest version: 1.1.1 (MC 26.1.2)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.1/spoutcraft-1.1.1.jar)**
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;
 Development versions: download from
