@@ -79,8 +79,14 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
     public void remove() {
         if (this.resourcesAdded == null) return;
         this.unfreeze();
-        for (int i = this.resourcesAdded.size() - 1; i >= 0; i--) {
-            Pair<ResourceKey<T>, T> resource = this.resourcesAdded.get(i);
+        this.removeWhileUnfrozen(this.resourcesAdded);
+        this.refreeze();
+        this.resourcesAdded = null;
+    }
+
+    public void removeWhileUnfrozen(List<Pair<ResourceKey<T>, T>> resources) {
+        for (int i = resources.size() - 1; i >= 0; i--) {
+            Pair<ResourceKey<T>, T> resource = resources.get(i);
             this.remove(resource.left(), resource.right());
         }
         if (this.originalFrozenTags != null) {
@@ -89,8 +95,6 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
             frozenTags.putAll(this.copyFrozenTags(this.originalFrozenTags));
             this.originalFrozenTags = null;
         }
-        this.refreeze();
-        this.resourcesAdded = null;
     }
 
     public void remove(ResourceKey<T> resourceKey, T resource) {
