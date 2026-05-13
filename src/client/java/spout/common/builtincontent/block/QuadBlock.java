@@ -34,9 +34,9 @@ import java.util.Arrays;
 /**
  * A 1/8th cube.
  */
-public class BevelBlock extends Block implements SimpleWaterloggedBlock {
+public class QuadBlock extends Block implements SimpleWaterloggedBlock {
 
-    public static final MapCodec<BevelBlock> CODEC = simpleCodec(BevelBlock::new);
+    public static final MapCodec<QuadBlock> CODEC = simpleCodec(QuadBlock::new);
     public static final BooleanProperty NORTH_WEST_BOTTOM = SpoutBlockStateProperties.NORTH_WEST_BOTTOM;
     public static final BooleanProperty SOUTH_WEST_BOTTOM = SpoutBlockStateProperties.SOUTH_WEST_BOTTOM;
     public static final BooleanProperty NORTH_WEST_TOP = SpoutBlockStateProperties.NORTH_WEST_TOP;
@@ -203,7 +203,7 @@ public class BevelBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
-    public BevelBlock(BlockBehaviour.Properties properties) {
+    public QuadBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(
             this.defaultBlockState()
@@ -220,7 +220,7 @@ public class BevelBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public MapCodec<? extends BevelBlock> codec() {
+    public MapCodec<? extends QuadBlock> codec() {
         return CODEC;
     }
 
@@ -297,7 +297,7 @@ public class BevelBlock extends Block implements SimpleWaterloggedBlock {
 
         BlockState stateAtPos = level.getBlockState(pos);
 
-        // CASE 1: clicking an existing bevel block → always try to fill it
+        // CASE 1: clicking an existing quad block → always try to fill it
         if (stateAtPos.is(this)) {
             BooleanProperty prop = getTargetProperty(context, pos);
             if (!stateAtPos.getValue(prop)) {
@@ -316,7 +316,7 @@ public class BevelBlock extends Block implements SimpleWaterloggedBlock {
 
         BlockState existing = level.getBlockState(placePos);
 
-        // If placing into another bevel → merge
+        // If placing into another quad → merge
         if (existing.is(this)) {
             BooleanProperty prop = getTargetProperty(context, placePos);
             if (!existing.getValue(prop)) {
@@ -325,7 +325,7 @@ public class BevelBlock extends Block implements SimpleWaterloggedBlock {
             return null;
         }
 
-        // Otherwise create new bevel block
+        // Otherwise create new quad block
         FluidState fluid = level.getFluidState(placePos);
 
         BooleanProperty prop = getTargetProperty(context, placePos);
