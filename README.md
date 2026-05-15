@@ -16,7 +16,7 @@
 
 </div>
 
-> # The Spoutcraft repository has moved to: [ModernSpout/Spout](github.com/ModernSpout/Spout)
+> # The Spoutcraft repository has moved to: [ModernSpout/Spout](https://github.com/ModernSpout/Spout)
 
 ## Introduction
 
@@ -38,7 +38,7 @@ It is incredibly fast: a server's modded content is downloaded and added in less
 &nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;From [Modrinth](https://modrinth.com/mod/spout-client) or
   [CurseForge](https://www.curseforge.com/minecraft/mc-mods/spout)
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;Directly from GitHub: see [ModernSpout/Spout](github.com/ModernSpout/Spout)
+&nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;Directly from GitHub: see [ModernSpout/Spout](https://github.com/ModernSpout/Spout)
 
 ## Installation
 
@@ -48,4 +48,4 @@ Requires [Fabric API](https://modrinth.com/mod/fabric-api).
 
 ## Installing Spout server-side
 
-* See [ModernSpout/Spout](github.com/ModernSpout/Spout)
+* See [ModernSpout/Spout](https://github.com/ModernSpout/Spout)
