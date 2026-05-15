@@ -1,16 +1,3 @@
-pluginManagement {
-	repositories {
-		maven {
-			name = "Fabric"
-			url = uri("https://maven.fabricmc.net/")
-		}
-		mavenCentral()
-		gradlePluginPortal()
-	}
+rootProject.name = "spout-monorepo"
 
-	plugins {
-        id("net.fabricmc.fabric-loom") version providers.gradleProperty("loom_version")
-	}
-}
-
-rootProject.name = "spoutcraft"
+includeBuild("spoutcraft-fabric")

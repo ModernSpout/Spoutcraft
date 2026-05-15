@@ -1,6 +1,6 @@
 <div align="center">
 
-  <!--<img src="icon.png" alt="Spout logo" width="21%" align="right">-->
+  <!--<img src="logo.png" alt="Spout logo" width="21%" align="right">-->
   <h1>
     Spoutcraft<br>client mod (Fabric)
   </h1>
